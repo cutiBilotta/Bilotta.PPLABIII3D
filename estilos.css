@@ -1,0 +1,157 @@
+h2{
+    text-transform: uppercase;
+    color:#661111 ;
+    font-size: 40px;;
+   
+}
+th, td{
+    border : 1px solid  black;
+    padding : 5px 10px;
+}
+td{
+    text-align: center;
+}
+
+table{
+    border-collapse: collapse;
+    width:70%;
+    margin: 0 auto; 
+}
+
+th{
+    background-color:rgb(15, 105, 75);
+    text-transform: uppercase;
+   
+}
+
+h1{
+    position: relative;
+    font-size: 90px;
+    top:250px;
+    left: 100px;
+    color: black;
+    -webkit-text-stroke : 2px white; 
+    text-align: left;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+header{
+    background-image: url("./imgSuperheroes/header.jpg");
+    height: 100vh;
+    width: 100vw;
+}
+a{
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 40px;
+    position: relative;
+
+}
+#logo{
+
+    height: 120px;
+    float:left;
+    margin-top: 0px;
+}
+
+nav{
+    position: relative;
+    justify-content: space-between;
+    top: 50px;
+    height: 140px;
+    background-color: black;
+}
+
+nav>ul{
+    display: flex;
+    position: relative;
+    left: 600px;
+    height: 80px;
+    list-style: none;
+    top: 50px;
+}
+
+
+
+
+*{
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+
+}
+
+#formulario{
+    border : 1px solid  black;
+    padding : 20px;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#D6EAF8;
+    font-size: 25px;
+
+    
+}
+
+fieldset{
+    width: 40%;
+    border: 2px solid black;
+    margin:auto;
+}
+
+.e-botones{
+
+    font-size:20px;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(15, 105, 75);
+    border: 3px solid darkgray;
+    display: block;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+
+.rowPar{
+    background-color: #D6EAF8 
+}
+
+select{
+    background-color: #EAFAF1;
+    height: 30px;
+    width: 200px;
+}
+input{
+    background-color: #EAFAF1;
+    height: 30px;
+    width: 200px;
+}
+
+footer>nav>ul{
+    display: flex;
+    position: relative;
+    left: 20px;
+    height: 80px;
+    list-style: none;
+
+}
+
+
+footer>nav>ul>li>a{
+    position: relative;
+    bottom: -25px;
+
+}
+
+#pFooter{
+    font-size: 30px;
+    float:right;
+    position: relative; 
+    bottom: 100px;
+    left: -15px;
+    color: white;
+}
+
+
+
+

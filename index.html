@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" type="module"></script>
+    <link href="estilos.css" rel="stylesheet"></href>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <title>Superheroes</title>
+</head>
+<body>
+    <nav id="navIndex">
+        <img id="logo" src="./imgSuperheroes/logo.png">
+        <ul>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Anuncios</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contacto</a></li>
+
+        </ul>
+    </nav>
+    
+
+    <div >
+    </br></br>
+        <h2>Crud Heroes</h2>
+        <img src="./imgSuperheroes/comic.jpg" width="1000" style="width: 100vw;">
+
+    </div>
+
+    <main>
+        
+
+
+                <form id = "formulario">
+                </br>
+                        <label for= "txtNombre">Nombre:</label">
+                        <input type="text"   name="txtNombre" placeholder="titulo del nombre..." autocomplete="off" id="txtNombre" required ></br></br>
+                    </br>
+                        <i class="fa-solid fa-mask fa-xl" style="color: #000000;"></i>
+                        <label for="txtAlias">Alias:</label>
+                        <input type="text" name="txtAlias" placeholder="ingrese el alter ego..." autocomplete="off" id="txtAlias"  required></br></br>
+                    </br>
+                        <i class="fa-solid fa-hand-fist fa-xl" style="color: #000000;"></i>
+                        <label for="rngFuerza">Fuerza:</label>
+                        <input type="range" name="rngFuerza"  min ="0"  max="100" autocomplete="off" id="rngFuerza" required></br></br>
+                    </br>
+                        <i class="fa-solid fa-shield-halved fa-xl" style="color: #000000;"></i>
+                        <label for="selectArmas">Arma:</label>
+                        <select name="armas" id="selectArmas" style="width: 300px;"  required></select></br></br>
+                    </br>
+                        <fieldset>
+                            <legend> <i class="fa-solid fa-pen fa-xl" style="color: #000000;"></i>Editorial</legend>
+
+                            <input type ="radio" name="rdoEditorial" value="DC" checked>DC
+                        </br></br>
+
+                        <input type ="radio" name="rdoEditorial" value="Marvel">MARVEL
+                            
+
+                        </fieldset>
+                        </br>
+                        </br>
+                            <button value="Enviar" id="btnEnviar" class="e-botones">
+                                
+                                <i class="fa-solid fa-floppy-disk fa-xl"></i>
+                                Guardar
+                            </button>
+                            
+                            <input type="button" value="Eliminar" id="btnDelete" class="e-botones" >
+                            <input type="hidden" name="txtId" id="txtId" >
+
+                        </br>
+                        </br><i id="spinner" class="fa-solid fa-bolt fa-spin fa-2xl" style="color: #000000;"></i>
+                        </br>
+            </form>
+  
+        <section>
+            <h2>Listado de Superheroes</h2>
+            <p style="font-size:20px;">Ordenar Listado:</p>
+            <input type="button" value="Fuerza ↓↑" id="btnPrecio" class="e-botones" >
+            <input type="button" value="Alfabet.↓↑" id="btnAlfabet" class="e-botones" ></br></br>
+            
+
+            <div id="divTabla"></div></br>
+        </section>
+
+    </main>
+
+   
+
+    <footer style="background-color: black">
+        <nav>
+            <ul>
+                <li><a href="paginaPrincipal.html" style="color: red">Nosotros</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Anuncios</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <p id="pFooter">Laboratorio III - Todos los derechos reservados 2023 &copy;</p>
+        </nav>
+    </footer>
+
+    
+</body>
+</html>
