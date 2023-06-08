@@ -1,0 +1,74 @@
+header{
+    background-image: url("./imgSuperheroes/recorte.png");
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+
+}
+nav{
+    background-color: #ccc;
+}
+ul{
+    position: relative;
+    list-style: none;
+    display: inline-block;
+    list-style-type: none;
+
+}
+li{
+    display: inline;
+    padding: 30px;
+}
+a{
+    text-decoration: none;
+    font-size: 40px;
+    color:  black;
+}
+
+header ul{
+    float: right;
+    top: 30px;
+    right: 60px;
+}
+
+h1{
+    position: relative;
+    font-size: 90px;
+    top:250px;
+    color: red;
+    -webkit-text-stroke : 4px black; 
+    float: left;
+    left: 50px;
+
+}
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h2{
+    text-transform: capitalize;
+    color:black ;
+    font-size: 40px;;
+    text-align: center;
+   
+}
+
+h3{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+article div{
+ text-align: center;
+}
+
+#divAnuncios{
+    text-align: center;
+}
+
+section{
+    background-image: url("./imgSuperheroes/dots4.jpg");
+}
+

@@ -10,30 +10,23 @@
     <title>Superheroes</title>
 </head>
 <body>
-    <nav id="navIndex">
-        <img id="logo" src="./imgSuperheroes/logo.png">
-        <ul>
-            <li><a href="#">Nosotros</a></li>
-            <li><a href="#">Anuncios</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contacto</a></li>
+    <header>
+        <nav id="navIndex">
+            <img id="logo" src="./imgSuperheroes/logo.png">
+            <ul>
+                <li><a href="paginaPrincipal.html" style="color: red">Home</a></li>
+                <li><a href="#">Personajes</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contacto</a></li>
 
-        </ul>
-    </nav>
+            </ul>
+        </nav>
+    </header>
     
-
-    <div >
-    </br></br>
-        <h2>Crud Heroes</h2>
-        <img src="./imgSuperheroes/comic.jpg" width="1000" style="width: 100vw;">
-
-    </div>
-
     <main>
-        
-
-
-                <form id = "formulario">
+            </br>
+            <h2>Crud Heroes</h2>
+            <form id = "formulario">
                 </br>
                         <label for= "txtNombre">Nombre:</label">
                         <input type="text"   name="txtNombre" placeholder="titulo del nombre..." autocomplete="off" id="txtNombre" required ></br></br>
@@ -54,53 +47,71 @@
                             <legend> <i class="fa-solid fa-pen fa-xl" style="color: #000000;"></i>Editorial</legend>
 
                             <input type ="radio" name="rdoEditorial" value="DC" checked>DC
-                        </br></br>
+                            </br></br>
 
-                        <input type ="radio" name="rdoEditorial" value="Marvel">MARVEL
-                            
-
+                            <input type ="radio" name="rdoEditorial" value="Marvel">MARVEL
                         </fieldset>
-                        </br>
-                        </br>
-                            <button value="Enviar" id="btnEnviar" class="e-botones">
+
+                        
+                    
+                            </br></br><button value="Enviar" id="btnEnviar" class="e-botones">
                                 
                                 <i class="fa-solid fa-floppy-disk fa-xl"></i>
                                 Guardar
                             </button>
                             
                             <input type="button" value="Eliminar" id="btnDelete" class="e-botones" >
+                            <input type="button" value="Cancelar" id="btnCancelar" class="e-botones" >
+
                             <input type="hidden" name="txtId" id="txtId" >
 
                         </br>
                         </br><i id="spinner" class="fa-solid fa-bolt fa-spin fa-2xl" style="color: #000000;"></i>
                         </br>
             </form>
-  
-        <section>
-            <h2>Listado de Superheroes</h2>
-            <p style="font-size:20px;">Ordenar Listado:</p>
+        </main>
+        <section id="sectionTabla">
+        </br></br>    
+
+            <fieldset id="fieldFiltrado">
+                <legend>Filtrar Campos</legend>
+
+                <input type="checkbox" value="fuerza" id="chkFuerza" class="e-checkbox">Fuerza<br>
+                <input type="checkbox" value="editorial" id="chkEditorial" class="e-checkbox">Editorial<br>
+                <input type="checkbox" value="arma" id="chkArma" class="e-checkbox">Arma<br>
+
+                <input type="button" value="Filtrar" id="btnFiltrar" class="e-botones" >
+
+            </fieldset>
+
+
+
+            </br></br>
             <input type="button" value="Fuerza ↓↑" id="btnPrecio" class="e-botones" >
             <input type="button" value="Alfabet.↓↑" id="btnAlfabet" class="e-botones" ></br></br>
-            
-
+    
             <div id="divTabla"></div></br>
+            </br></br>
         </section>
 
-    </main>
+    
 
-   
-
-    <footer style="background-color: black">
+    <footer>
         <nav>
             <ul>
-                <li><a href="paginaPrincipal.html" style="color: red">Nosotros</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="paginaPrincipal.html" style="color: red">Home</a></li>
+                <li><a href="#">Personajes</a></li>
                 <li><a href="#">Anuncios</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
             <p id="pFooter">Laboratorio III - Todos los derechos reservados 2023 &copy;</p>
         </nav>
     </footer>
+    
+
+
+
+    
 
     
 </body>

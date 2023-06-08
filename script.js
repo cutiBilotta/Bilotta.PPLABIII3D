@@ -12,17 +12,27 @@ const $btnEnviar= document.getElementById("btnEnviar");
 const $txtId= document.getElementById("txtId");
 const $tituloAlta= document.getElementById("tituloAlta");
 const $spinner= document.getElementById("spinner");
+const $btnFiltrar= document.getElementById("btnFiltrar");
+const $btnCancelar = document.getElementById("btnCancelar");
+const $chkFuerza= document.getElementById("chkFuerza");
 
-//const $armas = ["Armadura", "Espada" , "Martillo" , "Escudo" , "Arma de Fuego", "Felchas"]
-//localStorage.setItem("armas", JSON.stringify(["Armadura", "Espada", "Martillo", "Escudo", "Arma de Fuego", "Felchas"]));
+const $chkEditorial= document.getElementById("chkEditorial");
+const $chkArma= document.getElementById("chkArma");
+
+
+
+const $armas = ["Armadura", "Espada" , "Martillo" , "Escudo" , "Arma de Fuego", "Felchas"]
+localStorage.setItem("armas", JSON.stringify(["Armadura", "Espada", "Martillo", "Escudo", "Arma de Fuego", "Felchas"]));
+
 $spinner.style.display = 'none';
 const icono = "<i class='fa-solid fa-floppy-disk fa-xl'></i> Enviar";
 $btnDelete.style.visibility='hidden';
+$btnCancelar.style.visibility='hidden';
+
 const $anuncios = JSON.parse(localStorage.getItem("anuncios")) || [];
 const $formulario= document.forms[0];
 
 actualizarTabla($anuncios);
-//actualizarAnuncios($anuncios);
 cargarArmas();
 
 
@@ -36,6 +46,8 @@ window.addEventListener("click" , (e)=>{
         let id= e.target.parentElement.dataset.id;
         cargarFormulario($anuncios.find((anuncio) =>anuncio.id == id));
         $btnDelete.style.visibility='visible';
+        $btnCancelar.style.visibility='visible';
+
         $tituloAlta.textContent= "Eliminar/Modificar un Anuncio"
     }else if(e.target.matches("#btnDelete")){
         console.log("ENTRE ACA");
@@ -82,23 +94,6 @@ function actualizarTabla(data){
           $divTabla.appendChild(crearTabla(data));
     }
 }
-
-/*function actualizarAnuncios(){
-    while($divAnuncios.hasChildNodes()){
-        $divAnuncios.removeChild($divAnuncios.firstElementChild);
-
-
-    }
-
-    const data = JSON.parse(localStorage.getItem("anuncios")) ;
-    
-    if(data != null){
-        
-        $divAnuncios.appendChild(crearTarjeta(data));
-    
-          
-    }
-}*/
 
 
 
@@ -237,12 +232,79 @@ $btnPrecio.addEventListener('click', () =>{
 
 $btnAlfabet.addEventListener('click', () =>{
 
-    console.log("entre aca");
     const $tablaOrdenada= $anuncios.sort((a,b) => {
         return(b.nombre>a.nombre) ? -1 :1;
     });
 
     actualizarTabla($tablaOrdenada);
+});
+
+$btnCancelar.addEventListener('click', () =>{
+
+    $formulario.reset();
+    $txtId.value='';
+});
+
+$btnFiltrar.addEventListener('click', () =>{
+    
+    let opcion;
+    var $tablaFiltrada;
+    if($chkEditorial.checked && !$chkFuerza.checked && !$chkArma.checked){
+        opcion = 1;
+    }else if($chkEditorial.checked && $chkFuerza.checked && !$chkArma.checked){
+        opcion=2;
+    }else if($chkEditorial.checked && $chkFuerza.checked && $chkArma.checked){
+        opcion = 3;
+    }else if(!$chkEditorial.checked && !$chkFuerza.checked && !$chkArma.checked){
+        opcion = 4;
+    }else if(!$chkEditorial.checked && $chkFuerza.checked && !$chkArma.checked){
+        opcion = 5;
+    }else if(!$chkEditorial.checked && !$chkFuerza.checked && $chkArma.checked){
+        opcion = 6;
+    }else if($chkEditorial.checked && !$chkFuerza.checked && $chkArma.checked){
+        opcion = 7;
+    }
+    else if(!$chkEditorial.checked && $chkFuerza.checked && $chkArma.checked){
+        opcion = 8;
+    }
+
+    switch(opcion){
+        case 1:
+            $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias, editorial:a.editorial}));
+            break;
+        case 2:
+            $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias, editorial:a.editorial, fuerza:a.fuerza}));
+            break;
+        case 3:
+            $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias, editorial:a.editorial, fuerza:a.fuerza, arma:a.arma}));
+            break;
+        case 4:
+            $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias}));
+            break;
+        case 5:
+                $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias, fuerza:a.fuerza}));
+                break;
+        case 6:
+                $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias, arma:a.arma}));
+                break;
+        case 7:
+                $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias,editorial:a.editorial, arma:a.arma}));
+                break;
+        case 8:
+                $tablaFiltrada= $anuncios.map( a => ({ nombre:a.nombre, alias:a.alias,fuerza:a.fuerza, arma:a.arma}));
+                break;
+
+    }
+  
+  
+
+    
+    $chkArma.checked=false;
+    $chkFuerza.checked=false;
+    $chkEditorial.checked=false;
+    actualizarTabla($tablaFiltrada);
+
+    
 });
 
 

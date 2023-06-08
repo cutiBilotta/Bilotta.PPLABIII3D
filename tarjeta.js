@@ -37,14 +37,15 @@ export const crearTarjeta = (elemento)=>{
         arma.style.setProperty("padding", "15px");
     
         alias.style.setProperty("text-transform", "uppercase");
-        alias.style.setProperty("font-size", "25px");
+        alias.style.setProperty("font-size", "30px");
     
         nombre.style.setProperty("color", "red");
-        nombre.style.setProperty("font-size", "18px");
+        nombre.style.setProperty("font-size", "25px");
 
 
         div.style.setProperty("position", "relative");
         div.style.setProperty("top", "-30px");
+
 
         tarjeta.style.setProperty("width", "400px");
         tarjeta.style.setProperty("height", "200px");
