@@ -1,8 +1,7 @@
 
 import { Superheroe } from "./Superheroe.js";
 import { crearTabla } from "./tabla.js";
-//import { validarCadenaCantCaracteres, validarPrecio } from "./validaciones.js";
-//import { crearTarjeta } from "./tarjeta.js";
+import { validarCadenaCantCaracteres} from "./validaciones.js";
 
 const $divTabla = document.getElementById("divTabla");
 const $btnPrecio = document.getElementById("btnPrecio");
@@ -19,12 +18,18 @@ const $chkFuerza= document.getElementById("chkFuerza");
 const $chkEditorial= document.getElementById("chkEditorial");
 const $chkArma= document.getElementById("chkArma");
 
+const $btnDc = document.getElementById("btnFiltrarDc");
+const $btnMarvel = document.getElementById("btnFiltrarMarvel");
+const $promedioFuerza = document.getElementById("promFuerza");
+
+
 
 
 const $armas = ["Armadura", "Espada" , "Martillo" , "Escudo" , "Arma de Fuego", "Felchas"]
-localStorage.setItem("armas", JSON.stringify(["Armadura", "Espada", "Martillo", "Escudo", "Arma de Fuego", "Felchas"]));
+localStorage.setItem("armas", JSON.stringify(["Armadura", "Espada", "Martillo", "Escudo", "Arma de Fuego", "Flechas"]));
 
-$spinner.style.display = 'none';
+//$spinner.visibility = 'visible';
+$divTabla.visibility='hidden';
 const icono = "<i class='fa-solid fa-floppy-disk fa-xl'></i> Enviar";
 $btnDelete.style.visibility='hidden';
 $btnCancelar.style.visibility='hidden';
@@ -32,7 +37,24 @@ $btnCancelar.style.visibility='hidden';
 const $anuncios = JSON.parse(localStorage.getItem("anuncios")) || [];
 const $formulario= document.forms[0];
 
-actualizarTabla($anuncios);
+if($anuncios.length){
+    
+    setTimeout(()=>{
+        actualizarTabla($anuncios);
+        $spinner.classList.add("ocultar");
+        $divTabla.classList.remove("ocultar");
+    }, 3000);
+
+   
+}/*else
+{
+    setTimeout(() => {
+        $spinner.classList.add("ocultar");
+        $divTabla.insertAdjacentHTML("afterbegin", `<p>Aun no hay anuncios de Superheroes para mostrar</p>`);
+    }, 2000);
+}*/
+
+
 cargarArmas();
 
 
@@ -41,14 +63,13 @@ window.addEventListener("click" , (e)=>{
     if(e.target.matches("td")){
 
         $btnEnviar.innerHTML = "Modificar";
- 
-       //console.log(e.target.parentElement.dataset.id);
+        //console.log(e.target.parentElement.dataset.id);
         let id= e.target.parentElement.dataset.id;
         cargarFormulario($anuncios.find((anuncio) =>anuncio.id == id));
         $btnDelete.style.visibility='visible';
         $btnCancelar.style.visibility='visible';
 
-        $tituloAlta.textContent= "Eliminar/Modificar un Anuncio"
+        $tituloAlta.textContent= "Eliminar/Modificar un Superheroe"
     }else if(e.target.matches("#btnDelete")){
         console.log("ENTRE ACA");
         handlerDelete($formulario.txtId.value);
@@ -71,25 +92,19 @@ function cargarArmas(){
         $opcion.innerHTML=elemento;
 
         $fragment.appendChild($opcion);
-
-
     })
 
     $selectArmas.appendChild($fragment);
 
-
-    
-
 }
+
 function actualizarTabla(data){
+    $spinner.style.display = 'block';
 
     while($divTabla.hasChildNodes()){
         $divTabla.removeChild($divTabla.firstElementChild);
-
-
     }
-    //const data = JSON.parse(localStorage.getItem("anuncios")) ;
-    
+
     if(data != null){
           $divTabla.appendChild(crearTabla(data));
     }
@@ -105,55 +120,25 @@ $formulario.addEventListener("submit", (e) =>{
     const formAnuncio= new Superheroe(txtId.value, txtNombre.value, rngFuerza.value, txtAlias.value,  rdoEditorial.value, selectArmas.value);
     console.log(txtId.value);
 
-    console.log("Enviando...");
-    if(formAnuncio.id== ''){
-        formAnuncio.id = Date.now();
-        handlerCreate(formAnuncio);
-    }else{
-        handlerUpdate(formAnuncio);
-    }
-
-    $formulario.reset();
-
-
-
-    /*
-    if(formAnuncio.nombre){
-        if(formAnuncio.alias){
-            if(validarPrecio(formAnuncio.fuerza)){
-                if(formAnuncio.editorial){
-                    if( formAnuncio.armas){
-                       
-                            console.log("Enviando...");
-                            if(formAnuncio.id== ''){
-                                formAnuncio.id = Date.now();
-                                handlerCreate(formAnuncio);
-                            }else{
-                                handlerUpdate(formAnuncio);
-                            }
-
-                            $formulario.reset();
-
-                
-                        
-                    }else{
-                        alert("Armas invalida");
-                    }
-                }else{
-                    alert("Raza invalida");
-                }
+    if(validarCadenaCantCaracteres(formAnuncio.nombre)){
+        if(validarCadenaCantCaracteres(formAnuncio.alias)){
+            console.log("Enviando...");
+            if(formAnuncio.id== ''){
+                formAnuncio.id = Date.now();
+                handlerCreate(formAnuncio);
             }else{
-                alert("Precio invalido");
+                handlerUpdate(formAnuncio);
             }
+
+            $formulario.reset();
+            
         }else{
-            alert("Descripcion invalida");
+            alert("Alias invalido");
         }
-        
-        
     }else{
-        alert("Titulo invalido");
+        alert("Nombre invalido");
     }
-*/
+
 });
 
 const handlerCreate = ((nuevoAnuncio) =>{
@@ -171,6 +156,8 @@ const handlerUpdate = ((anuncioEditado) =>{
     $anuncios.push(anuncioEditado);
 
     $btnDelete.style.visibility='hidden';
+    $btnCancelar.style.visibility='hidden';
+
 
     actualizarStorage($anuncios);
     actualizarTabla($anuncios);
@@ -193,6 +180,7 @@ const handlerDelete = (id) =>{
    actualizarStorage($anuncios);
    actualizarTabla($anuncios);
    $btnDelete.style.visibility='hidden';
+   $btnCancelar.style.visibility='hidden';
    $btnEnviar.innerHTML = icono;
    $txtId.value='';
 
@@ -243,6 +231,12 @@ $btnCancelar.addEventListener('click', () =>{
 
     $formulario.reset();
     $txtId.value='';
+    $btnCancelar.style.visibility= 'hidden';
+    $btnDelete.style.visibility= 'hidden';
+    $btnEnviar.innerHTML=  "<i class='fa-solid fa-floppy-disk fa-xl'></i> Enviar";
+    $tituloAlta.textContent= "Crud Heroes - Alta Superheroe"
+
+
 });
 
 $btnFiltrar.addEventListener('click', () =>{
@@ -307,13 +301,64 @@ $btnFiltrar.addEventListener('click', () =>{
     
 });
 
-
+/*
 document.querySelectorAll('.e-botones').forEach(button => {
-    button.addEventListener('click', function(){
+    button.addEventListener('click', ()=>{
+        $spinner.classList.add("mostrar");
+        $divTabla.classList.add("ocultar");
 
-        $spinner.style.display = 'block';
-        setTimeout(function() {
-            $spinner.style.display = 'none';
-        }, 2000);
+        if($anuncios.length){
+    
+            setTimeout(()=>{
+                actualizarTabla($anuncios);
+                $spinner.classList.remove("mostrar");
+                $divTabla.classList.remove("ocultar");
+            }, 2000);
+        
+           
+        }else
+        {
+            setTimeout(() => {
+                $spinner.classList.add("ocultar");
+                $divTabla.insertAdjacentHTML("afterbegin", `<p>Aun no hay anuncios de Superheroes para mostrar</p>`);
+            },10);
+        }
     });
+});*/
+
+$btnDc.addEventListener('click', ()=>{
+
+   const  $tablaFiltrada= $anuncios.filter( a => a.editorial=="DC"? true: false)
+    actualizarTabla($tablaFiltrada);
+    
 });
+
+$btnMarvel.addEventListener('click', ()=>{
+
+    const  $tablaFiltrada= $anuncios.filter( a => a.editorial=="Marvel"? true: false)
+
+    actualizarTabla($tablaFiltrada);
+ 
+ });
+
+ $promedioFuerza.addEventListener('click', ()=>{
+
+   /*
+    for(let i=0; i<$anuncios.length ; i++){
+        
+            acumulador+=  Number($anuncios[i].fuerza)
+            console.log("entre aca: " + $anuncios[i].fuerza);
+        
+    }
+
+    console.log(acumulador);*/
+
+
+    let total= $anuncios.reduce((accumulated, currentValue) => Number(accumulated += currentValue.fuerza),0);
+        
+        console.log ("total fuerzas:" + total);
+        //$pPromedio.innerHTML= promedio;
+
+    
+ 
+ });

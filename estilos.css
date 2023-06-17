@@ -9,6 +9,7 @@ ul{
     display: inline-block;
     list-style-type: none;
 
+
 }
 li{
     display: inline;
@@ -23,7 +24,8 @@ a{
 header ul{
     float: right;
     top: 30px;
-    right: 60px;
+    right:15px;
+    
 }
 
 *{
@@ -37,6 +39,9 @@ th, td{
 }
 td{
     text-align: center;
+}
+tr:hover{
+    color:rgb(20, 180, 126);
 }
 
 table{
@@ -89,6 +94,7 @@ fieldset{
     width: 40%;
     margin: 0 auto;
     border: 2px solid black;
+    text-align: center;
 }
 
 .e-botones{
@@ -101,6 +107,7 @@ fieldset{
     display: block;
     margin: 0 auto;
     margin-top: 8px;
+  display: inline-block;
 }
 
 #sectionTabla{
@@ -111,12 +118,17 @@ fieldset{
     font-size: 20px;
 }
 
-
-#fieldFiltrado>input{
+input[type=checkbox] {
     display: inline-block;
 }
 
+.ocultar{
+    visibility: hidden;
+}
 
+.mostrar{
+    visibility:visible;
+}
 
 
 

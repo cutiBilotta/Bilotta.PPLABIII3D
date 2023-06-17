@@ -25,9 +25,10 @@
     
     <main>
             </br>
-            <h2>Crud Heroes</h2>
+            <h2 id="tituloAlta">Crud Heroes - Alta Superheroe</h2>
             <form id = "formulario">
                 </br>
+                        <i class="fa-solid fa-pen fa-xl" style="color: #000000;"></i>
                         <label for= "txtNombre">Nombre:</label">
                         <input type="text"   name="txtNombre" placeholder="titulo del nombre..." autocomplete="off" id="txtNombre" required ></br></br>
                     </br>
@@ -50,18 +51,16 @@
                             </br></br>
 
                             <input type ="radio" name="rdoEditorial" value="Marvel">MARVEL
-                        </fieldset>
-
                         
-                    
-                            </br></br><button value="Enviar" id="btnEnviar" class="e-botones">
+                        </fieldset>
+                            </br>
+                            <input type="button" value="Cancelar" id="btnCancelar" class="e-botones" >
+                            <button value="Enviar" id="btnEnviar" class="e-botones">
                                 
                                 <i class="fa-solid fa-floppy-disk fa-xl"></i>
                                 Guardar
                             </button>
-                            
                             <input type="button" value="Eliminar" id="btnDelete" class="e-botones" >
-                            <input type="button" value="Cancelar" id="btnCancelar" class="e-botones" >
 
                             <input type="hidden" name="txtId" id="txtId" >
 
@@ -75,22 +74,38 @@
 
             <fieldset id="fieldFiltrado">
                 <legend>Filtrar Campos</legend>
-
-                <input type="checkbox" value="fuerza" id="chkFuerza" class="e-checkbox">Fuerza<br>
-                <input type="checkbox" value="editorial" id="chkEditorial" class="e-checkbox">Editorial<br>
-                <input type="checkbox" value="arma" id="chkArma" class="e-checkbox">Arma<br>
+                </br>
+                <input type="checkbox" value="fuerza" id="chkFuerza" class="e-checkbox">Fuerza<br></br>
+                <input type="checkbox" value="editorial" id="chkEditorial" class="e-checkbox">Editorial<br></br>
+                <input type="checkbox" value="arma" id="chkArma" class="e-checkbox">Arma<br></br>
 
                 <input type="button" value="Filtrar" id="btnFiltrar" class="e-botones" >
+                <input type="button" value="Filtrar DC" id="btnFiltrarDc" class="e-botones">
+                <input type="button" value="Filtrar Marvel" id="btnFiltrarMarvel" class="e-botones">
+                
+
+
 
             </fieldset>
+            </br></br>
 
+            <fieldset>
+                <legend>Ordenar</legend>
+                </br></br>
+                
+                <input type="button" value="Prom. Fuerza" id="promFuerza" class="e-botones">
 
+                
+                <input type="button" value="Fuerza ↓↑" id="btnPrecio" class="e-botones" >
+                <input type="button" value="Alfabet.↓↑" id="btnAlfabet" class="e-botones" ></br></br>
+            </fieldset>
 
             </br></br>
-            <input type="button" value="Fuerza ↓↑" id="btnPrecio" class="e-botones" >
-            <input type="button" value="Alfabet.↓↑" id="btnAlfabet" class="e-botones" ></br></br>
+
     
             <div id="divTabla"></div></br>
+
+            <p id="pPromedio"></p>
             </br></br>
         </section>
 
