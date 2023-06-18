@@ -1,5 +1,6 @@
 nav{
-    background-image: url("./imgSuperheroes/dots.jpg");
+    background-image: url("../imgSuperheroes/backk.jpg");
+    background-size: 100%;
 
 }
 
@@ -68,7 +69,7 @@ footer p{
     font-size: 20px;
 }
 main{
-    background-image: url("./imgSuperheroes/back1.jpg");
+    background-image: url("../imgSuperheroes/back1.jpg");
     padding: 40px;
 
     background-size: 100%;
@@ -122,13 +123,7 @@ input[type=checkbox] {
     display: inline-block;
 }
 
-.ocultar{
-    visibility: hidden;
-}
 
-.mostrar{
-    visibility:visible;
-}
 
 
 

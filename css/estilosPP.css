@@ -1,5 +1,5 @@
 header{
-    background-image: url("./imgSuperheroes/recorte.png");
+    background-image: url("../imgSuperheroes/recorte.png");
     width: 100vw;
     height: 100vh;
     background-repeat: no-repeat;
@@ -69,6 +69,6 @@ article div{
 }
 
 section{
-    background-image: url("./imgSuperheroes/dots4.jpg");
+    background-image: url("../imgSuperheroes/dots4.jpg");
 }
 

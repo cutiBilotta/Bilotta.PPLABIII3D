@@ -14,48 +14,42 @@ const $spinner= document.getElementById("spinner");
 const $btnFiltrar= document.getElementById("btnFiltrar");
 const $btnCancelar = document.getElementById("btnCancelar");
 const $chkFuerza= document.getElementById("chkFuerza");
-
 const $chkEditorial= document.getElementById("chkEditorial");
 const $chkArma= document.getElementById("chkArma");
-
 const $btnDc = document.getElementById("btnFiltrarDc");
 const $btnMarvel = document.getElementById("btnFiltrarMarvel");
 const $promedioFuerza = document.getElementById("promFuerza");
-
-
-
+const $formulario= document.forms[0];
+//$divTabla.style.visibility='hidden';
 
 const $armas = ["Armadura", "Espada" , "Martillo" , "Escudo" , "Arma de Fuego", "Felchas"]
 localStorage.setItem("armas", JSON.stringify(["Armadura", "Espada", "Martillo", "Escudo", "Arma de Fuego", "Flechas"]));
+const $anuncios = JSON.parse(localStorage.getItem("anuncios")) || [];
+cargarArmas();
+//actualizarTabla($anuncios);
 
-//$spinner.visibility = 'visible';
-$divTabla.visibility='hidden';
-const icono = "<i class='fa-solid fa-floppy-disk fa-xl'></i> Enviar";
+$spinner.style.visibility = 'visible';
 $btnDelete.style.visibility='hidden';
 $btnCancelar.style.visibility='hidden';
 
-const $anuncios = JSON.parse(localStorage.getItem("anuncios")) || [];
-const $formulario= document.forms[0];
+const icono = "<i class='fa-solid fa-floppy-disk fa-xl'></i> Enviar";
 
-if($anuncios.length){
+if($anuncios.length>0){
     
     setTimeout(()=>{
         actualizarTabla($anuncios);
-        $spinner.classList.add("ocultar");
-        $divTabla.classList.remove("ocultar");
-    }, 3000);
+        $spinner.style.visibility= 'hidden';
+
+    }, 2000);
 
    
-}/*else
+}else
 {
     setTimeout(() => {
-        $spinner.classList.add("ocultar");
+        $spinner.style.visibility= 'hidden';
         $divTabla.insertAdjacentHTML("afterbegin", `<p>Aun no hay anuncios de Superheroes para mostrar</p>`);
     }, 2000);
-}*/
-
-
-cargarArmas();
+}
 
 
 window.addEventListener("click" , (e)=>{
@@ -71,7 +65,6 @@ window.addEventListener("click" , (e)=>{
 
         $tituloAlta.textContent= "Eliminar/Modificar un Superheroe"
     }else if(e.target.matches("#btnDelete")){
-        console.log("ENTRE ACA");
         handlerDelete($formulario.txtId.value);
         $formulario.reset();
     }
@@ -99,7 +92,6 @@ function cargarArmas(){
 }
 
 function actualizarTabla(data){
-    $spinner.style.display = 'block';
 
     while($divTabla.hasChildNodes()){
         $divTabla.removeChild($divTabla.firstElementChild);
@@ -110,15 +102,12 @@ function actualizarTabla(data){
     }
 }
 
-
-
 $formulario.addEventListener("submit", (e) =>{
     e.preventDefault();
     
     const {txtId, txtNombre, txtAlias, rngFuerza, rdoEditorial, selectArmas}  = $formulario; //esto es destructuring
           
     const formAnuncio= new Superheroe(txtId.value, txtNombre.value, rngFuerza.value, txtAlias.value,  rdoEditorial.value, selectArmas.value);
-    console.log(txtId.value);
 
     if(validarCadenaCantCaracteres(formAnuncio.nombre)){
         if(validarCadenaCantCaracteres(formAnuncio.alias)){
@@ -145,6 +134,9 @@ const handlerCreate = ((nuevoAnuncio) =>{
     $anuncios.push(nuevoAnuncio);
     actualizarStorage($anuncios);
     actualizarTabla($anuncios);
+    $tituloAlta.textContent= "Crud Heroes - Alta Superheroe"
+
+
 });
 
 const handlerUpdate = ((anuncioEditado) =>{
@@ -163,6 +155,8 @@ const handlerUpdate = ((anuncioEditado) =>{
     actualizarTabla($anuncios);
     $btnEnviar.innerHTML = icono;
     $txtId.value='';
+    $tituloAlta.textContent= "Crud Heroes - Alta Superheroe"
+
 
     //$formulario.reset();
 });
@@ -195,16 +189,12 @@ function cargarFormulario(a){
     let index=0;
 
     const {txtId, txtNombre, txtAlias, rngFuerza, rdoEditorial, selectArmas}  = $formulario; //esto es destructuring
-
-    const $viejaArma= a.arma;
     
     txtNombre.value=a.nombre;
     txtAlias.value=a.alias;
     rngFuerza.value=a.fuerza;
     rdoEditorial.value=a.editorial;
-
-    selectArmas.value= $viejaArma;
-
+    selectArmas.value= a.arma;
     txtId.value=a.id;
 }
 
@@ -289,42 +279,39 @@ $btnFiltrar.addEventListener('click', () =>{
                 break;
 
     }
-  
-  
-
-    
+     
     $chkArma.checked=false;
     $chkFuerza.checked=false;
     $chkEditorial.checked=false;
-    actualizarTabla($tablaFiltrada);
-
-    
+    actualizarTabla($tablaFiltrada);  
 });
 
-/*
+
 document.querySelectorAll('.e-botones').forEach(button => {
     button.addEventListener('click', ()=>{
-        $spinner.classList.add("mostrar");
-        $divTabla.classList.add("ocultar");
+        $spinner.style.visibility='visible';
+        $divTabla.style.visibility='hidden';
 
-        if($anuncios.length){
+        if($anuncios.length>0){
     
             setTimeout(()=>{
-                actualizarTabla($anuncios);
-                $spinner.classList.remove("mostrar");
-                $divTabla.classList.remove("ocultar");
+                $divTabla.style.visibility='visible';
+                $spinner.style.visibility= 'hidden';
+        
             }, 2000);
         
            
         }else
         {
             setTimeout(() => {
-                $spinner.classList.add("ocultar");
-                $divTabla.insertAdjacentHTML("afterbegin", `<p>Aun no hay anuncios de Superheroes para mostrar</p>`);
-            },10);
+                $divTabla.style.visibility='visible';
+
+                $spinner.style.visibility= 'hidden';
+                //$divTabla.insertAdjacentHTML("afterbegin", `<p>Aun no hay anuncios de Superheroes para mostrar</p>`);
+            }, 2000);
         }
     });
-});*/
+});
 
 $btnDc.addEventListener('click', ()=>{
 
@@ -342,17 +329,6 @@ $btnMarvel.addEventListener('click', ()=>{
  });
 
  $promedioFuerza.addEventListener('click', ()=>{
-
-   /*
-    for(let i=0; i<$anuncios.length ; i++){
-        
-            acumulador+=  Number($anuncios[i].fuerza)
-            console.log("entre aca: " + $anuncios[i].fuerza);
-        
-    }
-
-    console.log(acumulador);*/
-
 
     let total= $anuncios.reduce((accumulated, currentValue) => Number(accumulated += currentValue.fuerza),0);
         
